@@ -1,272 +1,117 @@
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<!-- saved from url=(0111)https://wang.bazhongying.asia/5.html?bd=1242545yipt4tig?assdfqsf=ewv08ywe89vgsdpovhjdsvsdf2e80f20fyiogveisdovc/ -->
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>欢迎进入QuickQ</title>
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html, body {
-  width: 100%;
-  height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif;
-}
-body {
-  background: #f5f5f5;
-  color: #001d2f;
-}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-.html_main {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  background: url(../images/bg.png) center center / cover no-repeat;
-}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>请等待5秒</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f3f3;
+        }
 
-.html_header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 99;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  background: rgba(255,255,255,0.92);
-}
+        .shield-container {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-.logo-img {
-  height: 70px;
-  width: auto;
-  display: block;
-}
-.right .language {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  color: #999;
-  cursor: pointer;
-}
-.language img {
-  width: 24px;
-}
+        .countdown {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+    </style>
+    <style>
+        #ai_assistant .popver[refresh]::after {
+            content: "刷新";
+        }
 
-.html_content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 140px 20px 80px;
-}
-.wrap {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  margin-bottom: 60px;
-}
-.windows {
-  flex: 1;
-}
-.windows h3 {
-  font-size: 32px;
-  color: #1a1a1a;
-  margin-bottom: 16px;
-}
-.windows p {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 10px;
-}
+        #ai_assistant .popver[copy]::after {
+            content: "undefined";
+        }
 
-.remarks {
-  margin: 30px 0;
-}
-.remarks_text {
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.remarks_text img {
-  width: 28px;
-  height: 28px;
-}
-.remarks_text p {
-  font-size: 17px;
-  color: #666;
-  margin: 0;
-}
+        #ai_assistant .popver[expandSidebar]::after {
+            content: "undefined";
+        }
 
-.download-btn {
-  display: inline-block;
-  width: 220px;
-  height: 60px;
-  line-height: 60px;
-  text-align: center;
-  background: #fea01a;
-  color: #fff;
-  border-radius: 12px;
-  font-size: 18px;
-  text-decoration: none;
-  cursor: pointer;
-}
-.download-btn:hover {
-  opacity: 0.9;
-}
+        #ai_assistant .popver[setting]::after {
+            content: "undefined";
+        }
+    </style>
+    <style>
+        #clip_copy,
+        #web-copy-btn-wk {
+            background: #215476 !important
+        }
+    </style>
 
-.demonstration {
-  flex: 1;
-  text-align: center;
-}
-.demonstration img {
-  max-height: 520px;
-  max-width: 100%;
-}
+    <style>
+        .option-head a {
+            color: #215476 !important;
+        }
 
-.system {
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-  margin-top: 40px;
-}
-.system_li img {
-  height: 100px;
-}
-.system_li p {
-  font-size: 16px;
-  color: #ccc;
-  margin-top: 8px;
-}
-.system_li .t {
-  color: #333;
-}
+        #option .hostList .list-group a {
+            color: #215476 !important;
+        }
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #4d4d4d;
-  padding: 15px 0;
-  text-align: center;
-}
-.footer_text {
-  color: #ccc;
-  font-size: 14px;
-  line-height: 1.6;
-}
+        #popup .copy .tips.success {
+            color: #215476 !important;
+        }
 
-.animation {
-  animation: fadeIn 0.6s ease forwards;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
+        #popup .option svg path {
+            fill: #215476 !important;
+        }
+    </style>
 </head>
 
 <body>
-<div class="html_main">
-  <div class="html_header">
-    <img src="./accset/logo.png" alt="Logo" class="logo-img">
-
-    <div class="right">
-      <div class="language">
-        <div class="lang">
-          <img src="./accset/lang.png">
-          <span>简体中文</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="html_content">
-    <div class="wrap">
-      <div class="windows">
-        <h3 class="animation">游戏加速器</h3>
-        <p class="animation">最新版本: 108</p>
-        <p class="animation">支持 window 7/8/10/11</p>
-
-        <div class="remarks animation">
-          <div class="remarks_text">
-            <img src="./accset/icon.png">
-            <p>一键连接，无需手动配置</p>
-          </div>
-          <div class="remarks_text">
-            <img src="./accset/icon.png">
-            <p>多个游戏线路供你选择</p>
-          </div>
-          <div class="remarks_text">
-            <img src="./accset/icon.png">
-            <p>流量加密，零日志政策</p>
-          </div>
-          <div class="remarks_text">
-            <img src="./accset/icon.png">
-            <p>7*18小时客服支持</p>
-          </div>
-        </div>
-
-        <a href="javascript:;" class="download-btn animation download-app">立即下载</a>
-      </div>
-
-      <div class="demonstration animation">
-        <img src="./accset/1657012377344113.jpg">
-      </div>
+    <div class="shield-container">
+        <h1>请稍候...</h1>
+        <p>我们正在检查您的访问。这通常只需要几秒钟。</p>
+        <div class="countdown" id="countdown">15</div>
+        <p>如果等待时间过长，请<a href="./Quickq 加速器.html">点击这里</a>。</p>
+        <!-- <p>如果等待时间过长，请<a href="https://wang.bazhongying.asia/index.html">点击这里</a>。</p> -->
     </div>
 
-    <div class="system">
-      <div class="system_li">
-        <img src="./accset/download_ios.png">
-        <p>iPhone/iPad</p>
-      </div>
-      <div class="system_li">
-        <img src="./accset/download_android.png">
-        <p>Android</p>
-      </div>
-      <div class="system_li">
-        <img src="./accset/download_windows.png">
-        <p class="t">Windows</p>
-      </div>
-      <div class="system_li">
-        <img src="./accset/download_mac.png">
-        <p>Mac</p>
-      </div>
-      <div class="system_li">
-        <img src="./accset/download_linux.png">
-        <p>Linux</p>
-      </div>
-    </div>
-  </div>
+    <script>
+        // 设置倒计时时间（秒）
+        var countdownTime = 15;
+        var countdownElement = document.getElementById('countdown');
 
-  <div class="footer">
-    <div class="footer_text">
-      Copyright 2018-2022 quickq游戏加速器<br>
-      开发者名称：APP/游戏加速器 更新时间：2025-9-11 版本号：版本3.2.22 |
-      <a href="/" target="_blank" style="color:#ccc">用户协议</a> |
-      <a href="/" target="_blank" style="color:#ccc">隐私协议</a>
-    </div>
-  </div>
-</div>
+        // 更新倒计时显示
+        var countdownInterval = setInterval(function () {
+            countdownTime--;
+            countdownElement.textContent = countdownTime;
 
-<script>
-window.downloadURL = 'https://hhfsnaufhkskt.oss-cn-hongkong.aliyuncs.com/inste%20win64-QuickQ102.700.zip';
+            if (countdownTime <= 0) {
+                clearInterval(countdownInterval);
+                // 跳转到目标页面
+                window.location.href = 'index.html';
+            }
+        }, 1000);
+    </script>
 
-document.querySelectorAll('.download-app').forEach(link => {
-  link.onclick = function(e){
-    e.preventDefault();
-    let a = document.createElement('a');
-    a.href = window.downloadURL;
-    a.download = 'Qk.zip';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
-});
-</script>
+    <!-- 同时使用meta刷新作为备用方案（如果JavaScript被禁用） -->
+    <noscript>
+        <meta http-equiv="refresh" content="5;url=index.html">
+    </noscript>
+    <script defer="" src="./请等待5秒_files/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+        data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;1a7c2adec67a45e987902b69401c25c9&quot;,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}"
+        crossorigin="anonymous"></script>
+
 </body>
+
 </html>
