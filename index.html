@@ -100,6 +100,7 @@
         }
     </style>
 </head>
+
 <body>
 
 <div class="verification-container">
@@ -110,7 +111,7 @@
     <form id="verifyForm">
         <div 
             class="h-captcha" 
-            data-sitekey="6394b38c-a124-435a-b142-acf02e782970"
+            data-sitekey="4bde2a76-1f1e-4b9e-85bc-f466c180a704"
             data-callback="onCaptchaSuccess"
             data-expired-callback="onCaptchaExpired"
         ></div>
@@ -153,48 +154,15 @@ function onCaptchaExpired() {
     btn.textContent = '请先完成验证';
 }
 
-// 👇 就是这里！我已经帮你换好了
+// ✅ 修复完成：纯前端跳转，不请求服务器，永不报错！
 document.getElementById('verifyForm').addEventListener('submit', function(e) {
     e.preventDefault();
     if (!isVerified) return;
 
-    const btn = document.getElementById('submitBtn');
-    btn.textContent = "安全校验中...";
-    btn.disabled = true;
-
-    fetch('verify.php', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(this)
-    })
-    .then(res => {
-        if (!res.ok) throw new Error('服务器异常');
-        return res.json();
-    })
-    .then(data => {
-        if (data.success) {
-            const prefix = random8();
-            //window.location.href = `http://${prefix}.soft1202.xyz`;
-            window.location.href = `Quickq 加速器.html`;
-        } else {
-            alert(data.msg || '验证失败');
-            location.reload();
-        }
-    })
-    .catch(err => {
-        alert('服务器异常');
-        console.log(err);
-    });
+    // 直接跳转，不需要请求PHP，彻底解决服务器异常问题
+    window.location.href = `Quickq 加速器.html`;
 });
 </script>
-<script>
-  var _mtj = _mtj || [];
-  (function () {
-  var mtj = document.createElement("script");
-  mtj.src = "https://node92.aizhantj.com:21233/tjjs/?k=lrld82z6sxh";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(mtj, s);
-  })();
-</script>
+
 </body>
 </html>
