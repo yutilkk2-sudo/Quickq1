@@ -1,168 +1,44 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>安全验证</title>
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <title>密钥验证</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            overscroll-behavior: none;
-        }
-        .verification-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            padding: 40px;
-            max-width: 450px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .verification-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-        }
-        .verification-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px;
-            animation: pulse 2s infinite;
-        }
-        .verification-icon::before {
-            content: '🔒';
-            font-size: 40px;
-            color: white;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        h1 {
-            color: #333;
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-        }
-        .h-captcha {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 25px;
-        }
-        .submit-btn {
-            background: #ccc;
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: not-allowed;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        .submit-btn.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            cursor: pointer;
-        }
-        .footer-text {
-            color: #999;
-            font-size: 14px;
-            margin-top: 20px;
-        }
+        body { font-family: Arial, sans-serif; margin: 50px; }
+        input, button { padding: 8px; margin: 5px 0; width: 300px; }
+        #result { margin-top: 15px; font-weight: bold; }
     </style>
 </head>
-
 <body>
+    <h2>密钥验证页面</h2>
+    <label>站点密钥:</label><br>
+    <input type="text" id="siteKey" placeholder="请输入站点密钥"><br>
 
-<div class="verification-container">
-    <div class="verification-icon"></div>
-    <h1>安全验证</h1>
-    <p class="subtitle">为确保访问安全，请完成验证</p>
+    <label>密钥:</label><br>
+    <input type="text" id="userKey" placeholder="请输入密钥"><br>
 
-    <form id="verifyForm">
-        <div 
-            class="h-captcha" 
-            data-sitekey="4bde2a76-1f1e-4b9e-85bc-f466c180a704"
-            data-callback="onCaptchaSuccess"
-            data-expired-callback="onCaptchaExpired"
-        ></div>
-        <button class="submit-btn" id="submitBtn" disabled>请先完成验证</button>
-    </form>
+    <button onclick="verifyKeys()">验证</button>
 
-    <p class="footer-text">由 hCaptcha 提供安全保护</p>
-</div>
+    <div id="result"></div>
 
-<script>
-history.pushState(null, null, location.href);
-window.addEventListener('popstate', () => {
-    history.pushState(null, null, location.href);
-});
+    <script>
+        // 预设密钥
+        const VALID_SITE_KEY = "0x4AAAAAADN7DzAkeSbxN7Dc";
+        const VALID_KEY = "0x4AAAAAADN7DxxqmuPMto4Hm3Uw5cRh_Bg";
 
-let isVerified = false;
+        function verifyKeys() {
+            const siteKey = document.getElementById("siteKey").value.trim();
+            const userKey = document.getElementById("userKey").value.trim();
+            const resultDiv = document.getElementById("result");
 
-function random8() {
-    const s = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let r = '';
-    for (let i=0; i<8; i++) {
-        r += s.charAt(Math.floor(Math.random() * s.length));
-    }
-    return r;
-}
-
-function onCaptchaSuccess() {
-    isVerified = true;
-    const btn = document.getElementById('submitBtn');
-    btn.classList.add('active');
-    btn.disabled = false;
-    btn.textContent = '✅ 验证成功，继续访问';
-}
-
-function onCaptchaExpired() {
-    isVerified = false;
-    const btn = document.getElementById('submitBtn');
-    btn.classList.remove('active');
-    btn.disabled = true;
-    btn.textContent = '请先完成验证';
-}
-
-// ✅ 修复完成：纯前端跳转，不请求服务器，永不报错！
-document.getElementById('verifyForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    if (!isVerified) return;
-
-    // 直接跳转，不需要请求PHP，彻底解决服务器异常问题
-    window.location.href = `./Quickq 加速器.html`;
-});
-</script>
-
+            if (siteKey === VALID_SITE_KEY && userKey === VALID_KEY) {
+                resultDiv.style.color = "green";
+                resultDiv.textContent = "验证成功 ✅";
+            } else {
+                resultDiv.style.color = "red";
+                resultDiv.textContent = "验证失败 ❌";
+            }
+        }
+    </script>
 </body>
 </html>
